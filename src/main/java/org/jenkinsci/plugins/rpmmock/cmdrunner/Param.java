@@ -8,7 +8,7 @@ public class Param {
 
     private boolean masked = false;
 
-    public enum ParamType { SIMPLE, DEFAULT, NO_VALUE, NO_VALUE_LONG, NAMELESS  }
+    public enum ParamType { SIMPLE, DEFAULT, CUSTOM, CUSTOM2, NO_VALUE, NO_VALUE_LONG, NO_VALUE_SHORT, NAMELESS  }
 
     private String name;
     private String value;
@@ -43,18 +43,22 @@ public class Param {
         return MessageFormat.format(getFormat(), new String[]{getName(), getValue()} );
     }
 
-
-
     public String getFormat() {
         switch( type ){
             case DEFAULT:
                 return "--{0}=\"{1}\"";
+            case CUSTOM:
+                return "--{0}={1}";
+            case CUSTOM2:
+                return "--{0} \"{1}\"";
             case SIMPLE:
                 return "-{0} {1}";
             case NO_VALUE:
                 return "-{0}";
             case NO_VALUE_LONG:
                 return "--{0}";
+            case NO_VALUE_SHORT:
+                return "{0}";
             case NAMELESS:
                 return "{1}";
             default:

@@ -28,11 +28,12 @@ public class SpecToolRunner extends DefaultRunner {
     }
 
     public void setSourceDir(String sourceDir) {
-        addParamWithValue("C", sourceDir);
+	addParamWithValue("directory", sourceDir, Param.ParamType.CUSTOM);
     }
 
     public void setSpecFile(String specFile) {
-        addParamWithValue("g", specFile );
+        addParam( new Param( specFile, Param.ParamType.NO_VALUE_SHORT ) );
+        addParam( new Param( "--get-files", Param.ParamType.NO_VALUE_SHORT ) );
     }
 
     public void setDownloadSources() {

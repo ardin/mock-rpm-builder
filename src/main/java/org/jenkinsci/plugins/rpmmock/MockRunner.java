@@ -5,7 +5,7 @@ import org.jenkinsci.plugins.rpmmock.cmdrunner.Param;
 
 public class MockRunner extends DefaultRunner{
     public MockRunner(String cmdName) {
-        super(cmdName);
+	super("/usr/bin/mock");
     }
 
 
@@ -13,7 +13,8 @@ public class MockRunner extends DefaultRunner{
         setConfigName(configName, null);
     }
      public void setConfigName( String configName, String path ){
-        addParamWithValue("r", configName );
+	addParamWithValue("root", configName, Param.ParamType.CUSTOM);
+	
         if( !( path == null || path.isEmpty() ) ){
             addParamWithValue( "configdir", path, Param.ParamType.DEFAULT );
         }
@@ -31,11 +32,11 @@ public class MockRunner extends DefaultRunner{
     }
 
     private void setSourcesDir(String sourcesDir) {
-        addParamWithValue("sources", sourcesDir, Param.ParamType.DEFAULT);
+        addParamWithValue("sources", sourcesDir, Param.ParamType.CUSTOM);
     }
 
     private void setSpecFile(String specFile) {
-        addParamWithValue( "spec", specFile, Param.ParamType.DEFAULT);
+        addParamWithValue( "spec", specFile, Param.ParamType.CUSTOM);
     }
 
     private void setBuildSrpm() {
@@ -43,7 +44,7 @@ public class MockRunner extends DefaultRunner{
     }
 
     private void setResultDir(String resultDir) {
-        addParamWithValue("resultdir", resultDir, Param.ParamType.DEFAULT);
+        addParamWithValue("resultdir", resultDir, Param.ParamType.CUSTOM);
     }
 
     public void setupRebuild(String resultDir, String srpmFile) {
@@ -57,7 +58,7 @@ public class MockRunner extends DefaultRunner{
     }
 
     public void setUniqueText(String buildName) {
-        addParamWithValue("uniqueext",buildName, Param.ParamType.DEFAULT);
+        addParamWithValue("uniqueext",buildName, Param.ParamType.CUSTOM);
     }
 
     public void setNoCleanupAfter(){
